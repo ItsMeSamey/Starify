@@ -6,7 +6,6 @@ import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
 import Music from './Music';
 import StarWarsSearch from './Search'
-import { render } from 'solid-js/web';
 
 const CryptoJS = require('crypto-js');
 
@@ -93,10 +92,7 @@ function Sidebar() {
         </div>
         <br />
 
-        <div class="relative">
-          <div class="bg-[url('side.jpg')] h-[400px] top-0 opacity-50 bg-cover flex justify-center items-center object-cover"></div>
-        </div>
-
+        <div class="bg-[url('side.jpg')] h-[400px] top-0 opacity-50 bg-cover flex justify-center items-center"></div>
       </nav>
     </div>
   )
