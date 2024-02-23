@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import './index.css';
+import './sidebar.css'
 import { page } from './index'
 import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
@@ -10,6 +11,21 @@ const CryptoJS = require('crypto-js');
 
 function Sidebar() {
   const buttonClasses = 'will-change-transform active:scale-[.93] select-none transition-all duration-200 flex items-center w-full p-3 leading-tight rounded-lg outline-none text-start hover:bg-[#3f1113] \ hover:bg-opacity-80 focus:text-blue-gray-900 active:bg-opacity-80 active:shadow-orange-500/50 shadow-2xl';
+  document.addEventListener('mousemove', (event) => {
+    const containerRect = container.getBoundingClientRect();
+    const mouseX = event.clientX - containerRect.left;
+    const mouseY = event.clientY - containerRect.top;
+    const image = document.querySelector('.relative').querySelector('div')
+    
+    // Adjust image position based on mouseX and mouseY values
+    image.style.top = `${mouseY / containerRect.height * 100}%`;
+    image.style.left = `${mouseX / containerRect.width * 100}%`;
+
+    // Adjust image opacity based on distance from the center
+    const distanceFromCenter = Math.abs(mouseX - containerRect.width / 2) + Math.abs(mouseY - containerRect.height / 2);
+    const maxDistance = Math.max(containerRect.width, containerRect.height);
+    image.style.opacity = 1 - distanceFromCenter / maxDistance;
+  });
   return (
     <div
       class='relative flex h-[100%] w-full max-w-[16rem] flex-col rounded-xl  bg-clip-border p-4 shadow-xl shadow-blue-gray-900/5'>
@@ -90,7 +106,10 @@ function Sidebar() {
         </div>
         <br />
 
-        <div class="bg-[url('side.jpg')] h-[400px] top-0 opacity-50 bg-cover flex justify-center items-center"></div>
+        <div class="relative">
+          <div class="bg-[url('side.jpg')] h-[400px] top-0 opacity-50 bg-cover flex justify-center items-center object-cover"></div>
+        </div>
+
       </nav>
     </div>
   )
