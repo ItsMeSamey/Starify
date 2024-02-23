@@ -16,7 +16,7 @@ function Music() {
   const [volume, setVolume] = createSignal(1);
   const [audio, { seek }] = createAudio(source, playing, volume);
   return (
-    <div class="flex justify-center items-center box-border w-full h-screen overflow-hidden bg-gray-900">
+    <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden bg-gray-900">
       <div class="flex flex-col items-center">
         <div class="flex justify-center shadow items-center bg-white rounded-full p-1">
           <button
