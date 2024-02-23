@@ -62,9 +62,52 @@ function Login() {
       setTimeout(() => setcl([]), 350)
     }
   });
+  function StarfallEffect() {
+    const [stars, setStars] = createSignal([]);
+  
+    createEffect(() => {
+      const interval = setInterval(() => {
+        const newStar = {
+          x: Math.random() * window.innerWidth,
+          y: -20,
+          size: Math.random() * 2 + 1,
+          opacity: Math.random() * 0.5 + 0.5, // Adjust opacity to make some stars brighter
+          animationDuration: Math.random() * 3 + 2,
+        };
+        setStars((prevStars) => [...prevStars, newStar]);
+  
+        // Remove stars that have fallen off the screen
+        setStars((prevStars) => prevStars.filter((star) => star.y < window.innerHeight));
+      }, 500);
+  
+      return () => clearInterval(interval);
+    });
+  
+    return (
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
+        {stars().map((star, index) => (
+          <polygon
+            key={index}
+            points={`${star.x},${star.y} ${star.x + 2},${star.y + 2} ${star.x - 2},${star.y + 2}`} // Star shape
+            fill="#FFF" // White color
+            opacity={star.opacity}
+          >
+            <animate
+              attributeName="points"
+              from={`${star.x},${star.y} ${star.x + 2},${star.y + 2} ${star.x - 2},${star.y + 2}`}
+              to={`${star.x},${window.innerHeight + 20} ${star.x + 2},${window.innerHeight + 22} ${star.x - 2},${window.innerHeight + 22}`}
+              dur={`${star.animationDuration}s`}
+              repeatCount="indefinite"
+            />
+          </polygon>
+        ))}
+      </svg>
+    );
+  }
 
   console.log(typeText)
   return (
+    <><StarfallEffect />
     <div class="bg-[url('bg.jpg')] h-[100vh] top-0 opacity-80 bg-cover flex justify-center items-center">
     <div class='flex flex-column bg-i text-white self-center text-center justify-center' >
       <div class='king animate__animated animate__fadeIn mt-12' style={{ '--animate-duration': '2s' }}>
@@ -97,7 +140,7 @@ function Login() {
         </div>
       </div>
     </div>
-
+    </>
   );
 }
 

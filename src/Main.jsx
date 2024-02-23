@@ -204,12 +204,55 @@ function Table() {
     </div>
   );
 }
+function StarfallEffect() {
+  const [stars, setStars] = createSignal([]);
+
+  createEffect(() => {
+    const interval = setInterval(() => {
+      const newStar = {
+        x: Math.random() * window.innerWidth,
+        y: -20,
+        size: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.5, // Adjust opacity to make some stars brighter
+        animationDuration: Math.random() * 3 + 2,
+      };
+      setStars((prevStars) => [...prevStars, newStar]);
+
+      // Remove stars that have fallen off the screen
+      setStars((prevStars) => prevStars.filter((star) => star.y < window.innerHeight));
+    }, 500);
+
+    return () => clearInterval(interval);
+  });
+
+  return (
+    <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
+      {stars().map((star, index) => (
+        <polygon
+          key={index}
+          points={`${star.x},${star.y} ${star.x + 2},${star.y + 2} ${star.x - 2},${star.y + 2}`} // Star shape
+          fill="#FFF" // White color
+          opacity={star.opacity}
+        >
+          <animate
+            attributeName="points"
+            from={`${star.x},${star.y} ${star.x + 2},${star.y + 2} ${star.x - 2},${star.y + 2}`}
+            to={`${star.x},${window.innerHeight + 20} ${star.x + 2},${window.innerHeight + 22} ${star.x - 2},${window.innerHeight + 22}`}
+            dur={`${star.animationDuration}s`}
+            repeatCount="indefinite"
+          />
+        </polygon>
+      ))}
+    </svg>
+  );
+}
 
 function Main() {
   return (
     <div class='flex absolute inset-y-0 inset-x-0'>
       <div class='flex flex-row transition-all w-full relative text-white'>
         <Sidebar />
+        <StarfallEffect />
         <Show when={page() == 'Main'} fallback>
           <Table />
         </Show>
