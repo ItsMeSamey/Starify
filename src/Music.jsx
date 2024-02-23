@@ -17,8 +17,8 @@ function Music() {
   const [audio, { seek }] = createAudio(source, playing, volume);
   return (
 
-    <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden">
-      <div class="flex flex-col justify-start top-0 relative left-0 ml-72 w-[20%] mt-6">
+    <div class="flex flex-col box-border w-full h-screen overflow-hidden">
+      <div class="flex flex-col justify-start ml-10 w-[85%] mt-16">
         <div class='select-none w-full h-full overflow-scroll text-gray-100 bg-[#0c0c0e] bg-clip-border rounded-2xl'>
           <table class='subpixel-antialiased w-full text-left table-auto min-w-max'>
             <thead class='text-center justify-center w-full'>
@@ -66,7 +66,7 @@ function Music() {
         </div>
 
       </div>
-      <div class="flex flex-col items-center mb-8">
+      <div class="flex flex-col items-center mb-8 fixed bottom-0 justify-center ml-[10%] z-[110]">
         <div class="flex justify-center shadow items-center bg-black rounded-3xl px-5 py-3 w-[800px]">
           <button
             class="bg-transparent cursor-pointer flex border-none scale-200"

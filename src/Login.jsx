@@ -72,7 +72,7 @@ function Login() {
           y: -20,
           size: Math.random() * 2 + 1,
           opacity: Math.random() * 0.5 + 0.5, // Adjust opacity to make some stars brighter
-          animationDuration: Math.random() * 3 + 2,
+          animationDuration: Math.random() * 3+2,
         };
         setStars((prevStars) => [...prevStars, newStar]);
   
