@@ -5,216 +5,35 @@ import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
 const CryptoJS = require('crypto-js');
 
-
-let ID;
-let KEY = 1;
-let FILES = [];
-let PASSWORD = 'oxox';
-const [list, setList] = createSignal(
-  [
-    //{ 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }, { 'name': 'Temp2', 'id': 'dasdqwdhavsdbjabshldjadbshliashds' }
-  ]
-)
-
-
-function jsonLoad() {
-  //   try {KEY = }catch{}
-  FILES = JSON.parse(localStorage.getItem('VAL'));
-  /*
-  if (KEY){
-    let response;
-    gapi.client.drive.files.get({
-      fileId: FS['id'],
-      alt: 'media'
-    }).then(function(res) { 
-      FILES = JSON.parse(decrypt(res.body, CryptoJS.SHA256(PASSWORD).toString(), false));
-    });
-  }*/
-}
-
-async function jsonWrite() {
-  /*
-  if (KEY){
-    response = await gapi.client.files.delete({
-      'fileId': KEY
-    });
-  }
-
-    file = JSON.toString(FILES);
-    var metadata = {
-      'mimeType': 'text/plain',
-      'name': 'L.txt',
-      'uploadType': 'media',
-      'parents': [ID],
-      'useContentAsIndexableText': false,
-      'body': file,
-    };
-
-    var form = new FormData();
-    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-    form.append('file', file);
-
-    var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-      var xhr = new XMLHttpRequest();
-    xhr.open('post', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    xhr.responseType = 'json';
-    xhr.onload = () => {
-      KEY = xhr.response.id;
-      document.getElementById('content').style.display = 'block';
-    };
-    xhr.send(form);
-    FILES.push(FP);*/
-
-  localStorage.setItem('VAL', JSON.toString(FILES))
-
-}
-
-function handleAuthClick() {
-  token().callback = async (resp) => {
-    let response;
-    if (resp.error !== undefined) { throw (resp); }
-    try {
-      response = await gapi.client.drive.files.list({ 'q': 'mimeType=\'application/vnd.google-apps.folder\', name=\'apiproxydf82e0bfd926a2aec9a57c69121ca4c824fb9de40.1509570332\'', 'pageSize': 1 });
-      ID = response.result.files[0].id;
-    } catch (err) { } // err!!!!
-    response = await gapi.client.drive.files.create({ 'mimeType': 'application/vnd.google-apps.folder', 'name': 'apiproxydf82e0bfd926a2aec9a57c69121ca4c824fb9de40.1509570332', 'parents': ['root'] });
-    ID = response.result.id;
-    /* try {
-      response = await gapi.client.drive.files.list({ 'q': 'mimeType=\'text/plain\'', 'q': 'name=\'2330759051.04ed9bf428c4ac12196c75a9cea2a629dfb0e28fdyxorpipa\'', 'pageSize': 1 });
-      ID = response.result.files[0].id;
-    } catch (err) { } // err!!!!
-    response = await gapi.client.drive.files.create({ 'mimeType': 'plain/text', 'name': 'apiproxydf82e0bfd926a2aec9a57c69121ca4c824fb9de40.1509570332', 'parents': [ID] });
-    KEY = response.result.id;*/
-  }
-  //    localStorage.setItem('google_token', gapi.client.getToken().access_token);
-  if (gapi.client.getToken() === null) {
-    token().requestAccessToken({ prompt: 'consent' });
-  } else {
-    token().requestAccessToken({ prompt: '' });
-  }
-}
-
-function handleSignoutClick() {
-  const token = gapi.client.getToken();
-  if (token !== null) {
-    google.accounts.oauth2.revoke(token.access_token);
-    gapi.client.setToken('');
-  }
-}
-
-async function uploadFile() {
-  const fileInput = document.getElementById('fileInput');
-  let file = fileInput.files[0];
-  let FS = {};
-  if (file) {
-    FS['name'] = file.name;
-    const hashedPwd = CryptoJS.SHA256(CryptoJS.lib.WordArray.random(256).toString()).toString();
-    FS['hash'] = hashedPwd;
-    file = await file.text();
-    file = encrypt(file, hashedPwd, false);
-
-    var metadata = { 'mimeType': 'text/plain', 'name': file.name, 'uploadType': 'media', 'parents': [ID], 'useContentAsIndexableText': false, 'body': file };
-    var form = new FormData();
-    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'text/plain' }));
-    form.append('file', file);
-    var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-    var xhr = new XMLHttpRequest();
-    xhr.open('post', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    xhr.responseType = 'json';
-    xhr.onload = () => {
-      FS['id'] = xhr.response.id;
-      FILES.push(FS);
-      setList(FILES);
-    };
-    xhr.send(form);
-    // jsonWrite();
-  } else {
-    console.error('No file selected.');
-  }
-}
-
-async function downloadFile(id, hash) {
-  gapi.client.drive.files.get({
-    fileId: id,
-    alt: "media"
-  }).then(function (res) {
-    let file = decrypt(res.body, hash, false);
-    const blob = new Blob([file], { type: 'text/plain' });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-
-    link.download = 'variable.txt';
-
-    document.body.appendChild(link);
-    link.click();
-
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  });
-}
-
-function encrypt(clearTextData, hashedPwd, useIV) {
-  const message = CryptoJS.AES.encrypt(clearTextData, hashedPwd);
-  return message.toString();
-}
-
-function decrypt(encryptedData, hashedPwd, useIV) {
-  let code = CryptoJS.AES.decrypt(encryptedData, hashedPwd);
-
-  let decryptedMessage = '';
-  if (code.sigBytes < 0) {
-    decryptedMessage = `Couldn't decrypt! It is probable that an incorrect password was used.`;
-    return decryptedMessage;
-  }
-  decryptedMessage = code.toString(CryptoJS.enc.Utf8);
-  return decryptedMessage;
-}
-
-function drawPopup() { } // TOOD
-
-/*
-          <div class='grid ml-auto place-items-center justify-self-end'>
-            <div
-              class='relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900'>
-              <span class=''>14</span>
-            </div>
-          </div>
-*/
-
 function Sidebar() {
   const buttonClasses = 'will-change-transform active:scale-[.93] select-none transition-all duration-200 flex items-center w-full p-3 leading-tight rounded-lg outline-none text-start hover:bg-[#3f1113] \ hover:bg-opacity-80 focus:text-blue-gray-900 active:bg-opacity-80 active:shadow-orange-500/50 shadow-2xl';
   return (
-    
-    
+
+
     <div
       class='relative flex h-[100%] w-full max-w-[16rem] flex-col rounded-xl  bg-clip-border p-4 shadow-xl shadow-blue-gray-900/5'>
-        
+
       <div
         class="relative block text-5xl antialiased font-[150] leading-snug tracking-normal select-none items-center rounded-full bg-gradient-to-tr from-[#ffa20002] to-[#590608] mx-auto py-.5 px-2 uppercase text-white text-center gon">
         <span class="">STARIFY</span>
       </div>
-      
+
       <br />
-      
+
       <nav class='flex flex-col gap-1 p-2 font-sans text-base font-normal '>
-      <div
-  role='button'
-  onClick={() => Setter('Main')}
-  className={page() == 'Main' ? 'bg-[#3f1113]' : ''}
-  class={buttonClasses}
->
-  <div class='grid mr-4 place-items-center'>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true' class='w-5 h-5'>
-      <path fill-rule='evenodd' d='M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z' clip-rule='evenodd'></path>
-    </svg>
-  </div>
-  Home
-</div>
+        <div
+          role='button'
+          onClick={() => Setter('Main')}
+          className={page() == 'Main' ? 'bg-[#3f1113]' : ''}
+          class={buttonClasses}
+        >
+          <div class='grid mr-4 place-items-center'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true' class='w-5 h-5'>
+              <path fill-rule='evenodd' d='M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z' clip-rule='evenodd'></path>
+            </svg>
+          </div>zz
+          Home
+        </div>
         <div role='button'
           onClick={() => Setter('ser')}
           className={page() == 'ser' ? 'bg-[#3f1113]' : ''}
@@ -311,22 +130,22 @@ function StarWarsSearch() {
   }
 
   return (
-    <div class="flex justify-center fixed w-[70%] mt-10 text-white">
-      <input type="text" class="bg-red-950 w-[60%]" value={searchTerm()} onInput={handleSearchInput} placeholder="Search for songs..."
-class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" />
-      <div class={`absolute top-full right-0 w-72 bg-black text-white rounded-lg overflow-hidden shadow-lg ${isDialogOpen() ? 'block' : 'hidden'}`}>
-        <div class="p-4">
-          <button class="absolute top-2 right-2 text-white hover:text-gray-400 focus:outline-none" onClick={handleCloseDialog}>×</button>
-          <ul class="overflow-y-auto max-h-48">
-            {searchResults().map((result, index) => (
-              <li key={index} onClick={() => handleSearchResultClick(result)} class="cursor-pointer py-2 px-4 hover:bg-gray-700">{result}</li>
-            ))}
-          </ul>
+    <>
+      <div class="flex justify-center fixed w-[70%] mt-10 text-white">
+        <input type="text" class="bg-red-950 w-[60%] px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value={searchTerm()} onInput={handleSearchInput} placeholder="Search for songs..." />
+        <div class={`absolute top-full right-0 w-72 bg-black text-white rounded-lg overflow-hidden shadow-lg ${isDialogOpen() ? 'block' : 'hidden'}`}>
+          <div class="p-4">
+            <button class="absolute top-2 right-2 text-white hover:text-gray-400 focus:outline-none" onClick={handleCloseDialog}>×</button>
+            <ul class="overflow-y-auto max-h-48">
+              {searchResults().map((result, index) => (
+                <li key={index} onClick={() => handleSearchResultClick(result)} class="cursor-pointer py-2 px-4 hover:bg-gray-700">{result}</li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <button class='px-11 bg-red-950 mx-6 rounded-xl hover:bg-red-800 transition-all'>Search</button>
       </div>
-      <button class='px-11 bg-red-950 mx-6 rounded-xl hover:bg-red-800 transition-all'>Search</button>
-    </div>
-    
+    </>
   );
 }
 
@@ -416,10 +235,10 @@ function Main() {
         </Show>
 
         <Show when={page() == 'ser'} fallback>
-        <div class="search-container">
-          <StarWarsSearch />
-       </div>
-      </Show>
+          <div class="search-container">
+            <StarWarsSearch />
+          </div>
+        </Show>
 
         <Show when={page() == 'play'} fallback>
         </Show>
