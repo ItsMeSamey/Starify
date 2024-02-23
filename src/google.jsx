@@ -14,8 +14,8 @@ function LoadScript(src, onloadFunction) {
   document.head.appendChild(script);
 }
 
-const CLIENT_ID = '346355228034-6s2nedt7u3gijeqrmucm0eofhj5dn044.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyDSxFcNECWTeyruM2d8132AvNeh8YveQBY';
+const CLIENT_ID = '695782243197-e80r8r2k9kmbcm3ldpjqdfu1np8ts1av.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyBpS9wdUObIZ4KCR8eRqSWMR12vqVQeVEE';
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 const SCOPES = 'https://www.googleapis.com/auth/drive';
 
