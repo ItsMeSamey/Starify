@@ -71,7 +71,7 @@ function Login() {
         <h1 class='margin-right-60 text-7xl subpixel-antialiased font-[150] mb-20'> WELCOME TO STARIFY </h1>
         <div class='mainin flex'>
           <h1 class='text-5xl'>We Provide </h1>
-          <h1 class='typing-text' style='color: #cc0b12;margin-left: 12px;font-size: 45px;margin-right: 20px;'></h1>
+          <h1 class='typing-text text-5xl' style='color: #cc0b12;margin-left: 12px;margin-right: 20px;'></h1>
         </div>
       </div>
 
