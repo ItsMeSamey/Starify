@@ -17,17 +17,13 @@ function Music() {
   const [audio, { seek }] = createAudio(source, playing, volume);
   return (
     
-    <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden bg-gray-900">
-      <div class="flex flex-col justify-start text-red  hover:text-green-500 top-0 fixed left-0 ml-72 w-[20%] mt-6">
+    <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden">
+      <div class="flex flex-col justify-start top-0 fixed left-0 ml-72 w-[20%] mt-6">
           <For
             each={Object.entries({
               'Sample 1':
                 'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
-              'Sample 5':
-              'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
               'Sample 2':
-                'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
-                'Sample 10':
                 'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
               'Sample 3':
                 'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample3.mp3?raw=true',
@@ -40,7 +36,7 @@ function Music() {
                 onClick={() => {
                   setSource(url);
                 }}
-                class="transition cursor-pointer bg-transparent px-4 py-3 border-none"
+                class=" active:text-red-800 transition-all hover:rounded-3xlcursor-pointer bg-transparent px-4 py-3 border-none text-white hover:text-red-500 hover:bg-gray-800"
                 classList={{
                   'text-black hover:text-red': url != source(),
                   'text-white': url == source(),
