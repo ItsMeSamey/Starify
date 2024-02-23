@@ -59,7 +59,7 @@ function Login() {
   const [cl, setcl] = createSignal([]);
   createEffect(() => {
     if (cl().length != 0) {
-      setTimeout(() => setcl([]), 350)
+      setTimeout(() => setcl([]), 0)
     }
   });
   function StarfallEffect() {
