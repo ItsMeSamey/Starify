@@ -4,7 +4,6 @@ import { Icon } from 'solid-heroicons';
 import { play, pause } from 'solid-heroicons/solid';
 import { speakerWave } from 'solid-heroicons/outline';
 
-
 const formatTime = (time) =>
   new Date(time * 1000).toISOString().substr(14, 8);
 
@@ -37,29 +36,31 @@ function Music() {
             </thead>
             <tbody>
               <For
-                each={Object.entries({
-                  'Sample 1':
-                    'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
-                  'Sample 2':
-                    'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
-                  'Sample 3':
-                    'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample3.mp3?raw=true',
-                  'Sample 4':
-                    'https://cdn.transistor.fm/file/transistor/m/shows/36181/5f2db453d1bb193bd3c1a3475036f0c7.mp3',
-                })}
+                each={
+                  Object.entries({
+                    'Sample 1':
+                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
+                    'Sample 2':
+                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
+                    'Sample 3':
+                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample3.mp3?raw=true',
+                    'Sample 4':
+                      'https://cdn.transistor.fm/file/transistor/m/shows/36181/5f2db453d1bb193bd3c1a3475036f0c7.mp3',
+                  })
+                }
               >
                 {([label, url]) => (
-                    <tr onClick={() => setSource(url)} class='will-change-transform duration-50 hover:duration-100 active:duration-200 ease-in-out middle rounded-2xl text-center align-middle active:opacity-[0.8] active:scale-[.94] hover:rounded-full even:bg-[#121214] hover:scale-[.99] origin-center'>
-                      <td class='p-4'>
-                        {label}
-                        <button >
-                        </button>
-                      </td>
-                      <td class='p-4'>
-                        <p class='block font-sans text-sm antialiased font-normal leading-normal'>
-                        </p>
-                      </td>
-                    </tr>
+                  <tr onClick={() => setSource(url)} class='will-change-transform duration-50 hover:duration-100 active:duration-200 ease-in-out middle rounded-2xl text-center align-middle active:opacity-[0.8] active:scale-[.94] hover:rounded-full even:bg-[#121214] hover:scale-[.99] origin-center'>
+                    <td class='p-4'>
+                      {label}
+                      <button >
+                      </button>
+                    </td>
+                    <td class='p-4'>
+                      <p class='block font-sans text-sm antialiased font-normal leading-normal'>
+                      </p>
+                    </td>
+                  </tr>
                 )}</For>
             </tbody>
           </table>

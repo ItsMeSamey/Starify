@@ -1,5 +1,9 @@
-import { createSignal, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import Setter from './index';
+
+
+const [searchTerm, setTerm] = createSignal(false);
+
 
 function StarWarsSearch() {
   const [searchTerm, setSearchTerm] = createSignal('');
@@ -35,7 +39,6 @@ function StarWarsSearch() {
     setDialogOpen(false);
   }
 
-
   onCleanup(() => {
     setSearchResults([]);
   });
@@ -43,26 +46,34 @@ function StarWarsSearch() {
   return (
     <>
       <div>
-        <input type="text" class='mt-7 mx-3 w-[900px] py-3 rounded-2xl px-4 ml-12 bg-[#380402d4]' value={searchTerm()} placeholder="Search for songs..." />
+        <input id="serquery" type="text"
+          class='mt-7 mx-3 w-[900px] py-3 rounded-2xl px-4 ml-12 bg-[#380402d4]'
+          value={searchTerm()}
+          onInput={(x) => setTerm(x.target.value)}
+          placeholder="Search for songs..." />
         <div class={isDialogOpen() ? 'block' : 'hidden'}>
           <div>
             <button onClick={handleCloseDialog}>×</button>
-            <ul>
-              {searchResults().map((item, index) => (
-                <li key={index} onClick={() => handleSearchResultClick(item.id.videoId)}>
-                  <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
-                  <span>{item.snippet.title}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
         <button class='mt-5 px-10 py-3 rounded-2xl bg-[#380402d4] hover:bg-red-900 transition-all hover:text-black'>Search</button>
       </div>
-
-
     </>
   );
 }
 
+function SearchResults() {
+  return (
+    <ul>
+      {searchResults().map((item, index) => (
+        <li key={index} onClick={() => handleSearchResultClick(item.id.videoId)}>
+          <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
+          <span>{item.snippet.title}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default StarWarsSearch;
+export { SearchResults, searchTerm };

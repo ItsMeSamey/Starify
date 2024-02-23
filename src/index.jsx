@@ -20,6 +20,7 @@ render(() => {
   });
   return (
     <>
+      <script src=""></script>
       <Show when={page() == 'Login'} fallback={<Main />}>
         <Login />
       </Show>
