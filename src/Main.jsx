@@ -3,7 +3,7 @@ import './index.css';
 import { page } from './index'
 import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
-import Music  from './Music'; 
+import Music from './Music';
 import StarWarsSearch from './Serach'
 
 const CryptoJS = require('crypto-js');
@@ -209,7 +209,6 @@ function Main() {
     <div class='flex absolute inset-y-0 inset-x-0'>
       <div class='flex flex-row transition-all w-full relative text-white'>
         <Sidebar />
-        <StarfallEffect />
         <Show when={page() == 'Main'} fallback>
           <Table />
         </Show>
