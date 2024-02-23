@@ -18,7 +18,7 @@ function Music() {
   return (
     <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden bg-gray-900">
       <div class="flex flex-col items-center">
-        <div class="flex justify-center shadow items-center bg-white rounded-full p-1">
+        <div class="flex justify-center shadow items-center bg-black rounded-full p-1">
           <button
             class="bg-transparent cursor-pointer flex border-none scale-200"
             disabled={audio.state == AudioState.ERROR}
@@ -46,8 +46,9 @@ function Music() {
             step="0.1"
             max={audio.duration}
             value={audio.currentTime}
-            class="cursor-pointer transition hover:bg-gray-300 w-400 form-range rounded-3xl appearance-none bg-gray-200 focus:outline-none focus:ring-0 "
+            class="cursor-pointer transition hover:bg-gray-900 w-full form-range rounded-3xl appearance-none bg-gray-900 focus:outline-none focus:ring-0 "
           />
+          
           <div class="flex px-2">
             <Icon class="w-6 text-red-600" path={speakerWave} />
             <input
@@ -83,7 +84,7 @@ function Music() {
                 }}
                 class="transition cursor-pointer bg-transparent px-4 py-3 border-none"
                 classList={{
-                  'text-white hover:text-gray-900': url != source(),
+                  'text-black hover:text-gray-900': url != source(),
                   'text-red-800': url == source(),
                 }}
               >
