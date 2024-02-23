@@ -1,19 +1,54 @@
 import { For, Show, createSignal } from 'solid-js';
 import { createAudio, AudioState } from '@solid-primitives/audio';
 import { Icon } from 'solid-heroicons';
-import { play, pause } from 'solid-heroicons/solid';
+import { play, pause, key } from 'solid-heroicons/solid';
 import { speakerWave } from 'solid-heroicons/outline';
+import { searchTerm } from './Search';
+
+import fuzzysort from 'fuzzysort'
 
 const formatTime = (time) =>
   new Date(time * 1000).toISOString().substr(14, 8);
 
 function Music() {
+  let oarray = [
+    { 'name': 'Heeriye', 'url': './src/assets/Heeriye.mp3' },
+    { 'name': 'Kesariya', 'url': './src/assets/Kesariya.mp3' },
+    { 'name': 'Khaab', 'url': './src/assets/Khaab.mp3' },
+    { 'name': 'Ek Baar hi Kiya to ', 'url': './src/assets/Ek-Baar-Hi-Kiya-Toh-Yaaron-Pyaar-Kya.mp3' },
+    { 'name': '3 peg', 'url': './src/assets/3 peg.mp3' },
+    { 'name': 'Arjan vailley', 'url': './src/assets/Arjan Vailly.mp3' },
+    { 'name': 'Mahiye', 'url': './src/assets/mahiye.mp3' },
+    { 'name': 'O Mahi O mahi', 'url': './src/assets/O Mahi.mp3' },
+    { 'name': 'Teri Baaton Mein Aisa Uljha', 'url': './src/assets/Teri Baaton Mein Aisa Uljha.mp3' },
+    { 'name': 'Jale 2', 'url': './src/assets/Jale 2  .mp3' }
+  ]
   const [source, setSource] = createSignal(
     'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true'
   );
   const [playing, setPlaying] = createSignal(false);
   const [volume, setVolume] = createSignal(1);
   const [audio, { seek }] = createAudio(source, playing, volume);
+
+  const TR = (x) => (
+    <tr onClick={() => setSource(x['url'])} class='will-change-transform duration-50 hover:duration-100 active:duration-200 ease-in-out middle rounded-2xl text-center align-middle active:opacity-[0.8] active:scale-[.94] hover:rounded-full even:bg-[#121214] hover:scale-[.99] origin-center'>
+      <td class='p-4'>
+        {x['name']}
+        <button >
+        </button>
+      </td>
+      <td class='p-4'>
+        <p class='block font-sans text-sm antialiased font-normal leading-normal'>
+        </p>
+      </td>
+    </tr>
+  )
+
+  const ST = (q) => {
+    if (q) {
+      return
+    }
+  }
   return (
 
     <div class="flex flex-col box-border w-full h-screen overflow-hidden">
@@ -35,35 +70,11 @@ function Music() {
               </tr>
             </thead>
             <tbody>
-              <For
-                each={
-                  Object.entries({
-                    'Heeriye':'./src/assets/Heeriye.mp3',
-                  'Kesariya':'./src/assets/Kesariya.mp3',
-                  'Khaab':'./src/assets/Khaab.mp3',
-                  'Ek Baar hi Kiya to ':'./src/assets/Ek-Baar-Hi-Kiya-Toh-Yaaron-Pyaar-Kya.mp3',
-                  '3 peg':'./src/assets/3 peg.mp3',
-                  'Arjan vailley':'./src/assets/Arjan Vailly.mp3',
-                  'Mahiye':'./src/assets/mahiye.mp3',
-                  'O Mahi O mahi':'./src/assets/O Mahi.mp3',
-                  'Teri Baaton Mein Aisa Uljha':'./src/assets/Teri Baaton Mein Aisa Uljha.mp3',
-                  'Jale 2':'./src/assets/Jale 2  .mp3',
-                  })
-                }
-              >
-                {([label, url]) => (
-                  <tr onClick={() => setSource(url)} class='will-change-transform duration-50 hover:duration-100 active:duration-200 ease-in-out middle rounded-2xl text-center align-middle active:opacity-[0.8] active:scale-[.94] hover:rounded-full even:bg-[#121214] hover:scale-[.99] origin-center'>
-                    <td class='p-4'>
-                      {label}
-                      <button >
-                      </button>
-                    </td>
-                    <td class='p-4'>
-                      <p class='block font-sans text-sm antialiased font-normal leading-normal'>
-                      </p>
-                    </td>
-                  </tr>
-                )}</For>
+              <Show when={searchTerm()} fallback={<For each={oarray}>{TR}</For>}>
+                <For each={fuzzysort.go(searchTerm(), oarray, { key: 'name' })}>
+                  {(x) => TR(x.obj)}
+                </For>
+              </Show>
             </tbody>
           </table>
         </div>
