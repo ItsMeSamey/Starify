@@ -1,7 +1,6 @@
 import { render } from 'solid-js/web';
 import { For, onMount, createSignal, createResource, createEffect } from "solid-js";
 
-import App from './App';
 import Login from './Login';
 import Main from './Main'
 import Loader from './google';
