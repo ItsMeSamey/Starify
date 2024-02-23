@@ -3,13 +3,13 @@ import './index.css';
 import { page } from './index'
 import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
+import Music  from './Music'; 
+
 const CryptoJS = require('crypto-js');
 
 function Sidebar() {
   const buttonClasses = 'will-change-transform active:scale-[.93] select-none transition-all duration-200 flex items-center w-full p-3 leading-tight rounded-lg outline-none text-start hover:bg-[#3f1113] \ hover:bg-opacity-80 focus:text-blue-gray-900 active:bg-opacity-80 active:shadow-orange-500/50 shadow-2xl';
   return (
-
-
     <div
       class='relative flex h-[100%] w-full max-w-[16rem] flex-col rounded-xl  bg-clip-border p-4 shadow-xl shadow-blue-gray-900/5'>
 
@@ -95,36 +95,25 @@ function Sidebar() {
   )
 }
 
-function Upload() {
-}
-
-
 function StarWarsSearch() {
   const [searchTerm, setSearchTerm] = createSignal('');
   const [searchResults, setSearchResults] = createSignal([]);
   const [isDialogOpen, setDialogOpen] = createSignal(false);
 
-  // Function to handle search input change
   function handleSearchInput(event) {
     setSearchTerm(event.target.value);
-    // Perform search logic here and update searchResults state accordingly
-    // For now, I'll just show dummy search results
     const dummyResults = ['Song 1', 'Song 2', 'Song 3']; // Dummy search results
     setSearchResults(dummyResults.filter(result => result.toLowerCase().includes(searchTerm().toLowerCase())));
   }
 
-  // Function to handle clicking on a search result
   function handleSearchResultClick(result) {
-    // Handle clicking on a search result here
     console.log('Clicked on search result:', result);
   }
 
-  // Function to handle clicking on the search icon to open the dialog
   function handleSearchIconClick() {
     setDialogOpen(true);
   }
 
-  // Function to close the dialog
   function handleCloseDialog() {
     setDialogOpen(false);
   }
@@ -149,21 +138,12 @@ function StarWarsSearch() {
   );
 }
 
-function MusicPlayer({ src }) {
-  return (
-    <div class="fixed inset-0 flex items-center justify-center z-50">
-      <div class="bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-lg p-8">
-        <audio src={src} controls autoplay class="w-full"></audio>
-      </div>
-    </div>
-  );
-}
+
 
 function Table() {
   const [musicFiles, setMusicFiles] = createSignal([]);
 
   createEffect(() => {
-    // Placeholder data for demonstration
     const testFiles = [
       { name: 'Song 1', duration: 180, src: 'x.mp3' },
       { name: 'Song 2', duration: 240, src: 'audio/song2.mp3' },
@@ -241,8 +221,8 @@ function Main() {
         </Show>
 
         <Show when={page() == 'play'} fallback>
+          <Music />
         </Show>
-        <Upload />
       </div>
     </div>
   );
