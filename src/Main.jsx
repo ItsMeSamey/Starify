@@ -100,21 +100,21 @@ function Sidebar() {
 function StarfallEffect() {
   const [stars, setStars] = createSignal([]);
 
+  for (let i = 0; i < 500; i++) {
+    const newStar = {
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.5 + 0.5, // Adjust opacity to make some stars brighter
+      animationDuration: Math.random() * 3 + 2,
+    };
+    setStars((prevStars) => [...prevStars, newStar]);
+  }
+
   createEffect(() => {
     const interval = setInterval(() => {
-      const newStar = {
-        x: Math.random() * window.innerWidth,
-        y: -20,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.5, // Adjust opacity to make some stars brighter
-        animationDuration: Math.random() * 3 + 2,
-      };
-      setStars((prevStars) => [...prevStars, newStar]);
-
-      // Remove stars that have fallen off the screen
       setStars((prevStars) => prevStars.filter((star) => star.y < window.innerHeight));
-    }, 500);
-
+    }, 2000);
     return () => clearInterval(interval);
   });
 
