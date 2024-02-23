@@ -1,7 +1,7 @@
 function Music({ src }) {
-    return (
-<></>
-    );
-  }
+  return (
+    <></>
+  );
+}
 
 export default Music
