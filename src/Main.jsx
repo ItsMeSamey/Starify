@@ -102,71 +102,6 @@ function Sidebar() {
   )
 }
 
-
-function Table() {
-  const [musicFiles, setMusicFiles] = createSignal([]);
-
-  createEffect(() => {
-    const testFiles = [
-      { name: 'Song 1', duration: 180, src: 'x.mp3' },
-      { name: 'Song 2', duration: 240, src: 'audio/song2.mp3' },
-      { name: 'Song 3', duration: 150, src: 'audio/song3.mp3' },
-    ];
-    setMusicFiles(testFiles);
-  });
-
-  const playAudio = (src) => {
-    const modal = document.createElement('div');
-    document.body.appendChild(modal);
-    const close = () => {
-      modal.remove();
-    };
-    render(() => <MusicPlayer src={src} />, modal);
-  };
-
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
-
-  return (
-    <div class='select-none w-full h-full overflow-scroll relative text-gray-100 bg-[#0c0c0e] bg-clip-border rounded-2xl'>
-      <table class='subpixel-antialiased w-full text-left table-auto min-w-max'>
-        <thead class='text-center justify-center w-full'>
-          <tr class=''>
-            <th class='p-4 border-b bg-[#141416] bg-[#111113]'>
-              <p class='block font-sans text-m antialiased font-normal leading-none text-white opacity-70'>
-                Name
-              </p>
-            </th>
-            <th class='p-4 border-b bg-[#141416] bg-[#111113]'>
-              <p class='block font-sans text-m antialiased font-normal leading-none text-white opacity-70'>
-                Duration
-              </p>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {musicFiles().map((file, index) => (
-            <tr key={index} class='will-change-transform duration-50 hover:duration-100 active:duration-200 ease-in-out middle rounded-2xl text-center align-middle active:opacity-[0.8] active:scale-[.94] hover:rounded-full even:bg-[#121214] hover:scale-[.99] origin-center'>
-              <td class='p-4'>
-                <button class='focus:outline-none' onClick={() => playAudio(file.src)}>
-                  {file.name}
-                </button>
-              </td>
-              <td class='p-4'>
-                <p class='block font-sans text-sm antialiased font-normal leading-normal'>
-                  {formatTime(file.duration)}
-                </p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 function StarfallEffect() {
   const [stars, setStars] = createSignal([]);
 
@@ -216,17 +151,16 @@ function Main() {
       <div class='flex flex-row transition-all w-full relative text-white'>
         <Sidebar />
         <Show when={page() == 'Main'} fallback>
-          <Table />
-        </Show>
-
-        <Show when={page() == 'ser'} fallback>
-          <div class="search-container">
+          <div class="flex flex-col">
             <StarWarsSearch />
+            <Music />
           </div>
         </Show>
 
+        <Show when={page() == 'ser'} fallback>
+        </Show>
+
         <Show when={page() == 'play'} fallback>
-          <Music />
         </Show>
       </div>
     </div>
