@@ -22,7 +22,7 @@ function Music() {
           <For
             each={Object.entries({
               'Sample 1':
-                'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
+                'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',  
               'Sample 2':
                 'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
               'Sample 3':
@@ -38,7 +38,7 @@ function Music() {
                 }}
                 class=" active:text-red-800 transition-all hover:rounded-3xlcursor-pointer bg-transparent px-4 py-3 border-none text-white hover:text-red-500 hover:bg-gray-800"
                 classList={{
-                  'text-black hover:text-red': url != source(),
+                  'hover:text-red': url != source(),
                   'text-white': url == source(),
                 }}
               >
