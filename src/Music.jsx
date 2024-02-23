@@ -18,7 +18,7 @@ function Music() {
   return (
     <div class="flex justify-center items-end box-border w-full h-screen overflow-hidden bg-gray-900">
       <div class="flex flex-col items-center">
-        <div class="flex justify-center shadow items-center bg-black rounded-full p-1">
+        <div class="flex justify-center shadow items-center bg-black rounded-3xl px-5 py-3 w-[800px]">
           <button
             class="bg-transparent cursor-pointer flex border-none scale-200"
             disabled={audio.state == AudioState.ERROR}
@@ -27,12 +27,12 @@ function Music() {
             }
           >
             <Icon
-              class="w-12 text-red-600 hover:text-red-700 transition"
+              class="w-14 text-red-600 hover:text-red-700 transition"
               path={audio.state === AudioState.PLAYING ? pause : play}
             />
           </button>
-          <div class="text-center min-w-32">
-            <Show
+          <div class=" min-w-32 ">
+            <Show class="flex-row flex-1"
               fallback="Loading..."
               when={audio.state !== AudioState.LOADING}
             >
@@ -46,7 +46,7 @@ function Music() {
             step="0.1"
             max={audio.duration}
             value={audio.currentTime}
-            class="cursor-pointer transition hover:bg-gray-900 w-full form-range rounded-3xl appearance-none bg-gray-900 focus:outline-none focus:ring-0 "
+            class="cursor-pointer transition hover:bg-gray-900 w-[50%] px-5 form-range rounded-3xl appearance-none bg-gray-900 focus:outline-none focus:ring-0 "
           />
           
           <div class="flex px-2">
@@ -58,7 +58,7 @@ function Music() {
               step="0.1"
               max={1}
               value={volume()}
-              class="cursor w-10"
+              class="cursor w-20"
             />
           </div>
         </div>
