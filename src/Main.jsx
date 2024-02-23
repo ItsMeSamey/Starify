@@ -1,4 +1,5 @@
 import styles from './index.module.css';
+import './Login.css'
 import './index.css';
 import { page } from './index'
 import Setter from './index'
@@ -10,7 +11,6 @@ const CryptoJS = require('crypto-js');
 
 function Sidebar() {
   const buttonClasses = 'will-change-transform active:scale-[.93] select-none transition-all duration-200 flex items-center w-full p-3 leading-tight rounded-lg outline-none text-start hover:bg-[#3f1113] \ hover:bg-opacity-80 focus:text-blue-gray-900 active:bg-opacity-80 active:shadow-orange-500/50 shadow-2xl';
-
   return (
     <div
       class='relative flex h-[100%] w-full max-w-[16rem] flex-col rounded-xl  bg-clip-border p-4 shadow-xl shadow-blue-gray-900/5'>
