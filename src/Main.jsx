@@ -1,6 +1,5 @@
 import styles from './index.module.css';
 import './index.css';
-import './sidebar.css'
 import { page } from './index'
 import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
