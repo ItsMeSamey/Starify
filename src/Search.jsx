@@ -27,7 +27,7 @@ function StarWarsSearch() {
   return (
     <>
       <div>
-        <input type="text"  value={searchTerm()} onInput={handleSearchInput} placeholder="Search for songs..." />
+        <input type="text" class='mt-7 mx-3 w-[900px] py-3 rounded-2xl px-4 ml-12 bg-[#380402d4]' value={searchTerm()} onInput={handleSearchInput} placeholder="Search for songs..." />
         <div class={isDialogOpen() ? 'block' : 'hidden'}>
           <div>
             <button onClick={handleCloseDialog}>×</button>
@@ -38,7 +38,7 @@ function StarWarsSearch() {
             </ul>
           </div>
         </div>
-        <button>Search</button>
+        <button class='mt-5 px-10 py-3 rounded-2xl bg-[#380402d4] hover:bg-red-900 transition-all hover:text-black'>Search</button>
       </div>
     </>
   );
