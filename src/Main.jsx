@@ -4,7 +4,7 @@ import { page } from './index'
 import Setter from './index'
 import { createSignal, createEffect } from 'solid-js'
 import Music from './Music';
-import StarWarsSearch from './Serach'
+import StarWarsSearch from './Search'
 
 const CryptoJS = require('crypto-js');
 
