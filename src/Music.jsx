@@ -7,3 +7,5 @@ function Music({ src }) {
       </div>
     );
   }
+
+export default Music
