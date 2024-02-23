@@ -38,14 +38,16 @@ function Music() {
               <For
                 each={
                   Object.entries({
-                    'Sample 1':
-                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample1.mp3?raw=true',
-                    'Sample 2':
-                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample2.mp3?raw=true',
-                    'Sample 3':
-                      'https://github.com/solidjs-community/solid-primitives/blob/main/packages/audio/dev/sample3.mp3?raw=true',
-                    'Sample 4':
-                      'https://cdn.transistor.fm/file/transistor/m/shows/36181/5f2db453d1bb193bd3c1a3475036f0c7.mp3',
+                    'Heeriye':'./src/assets/Heeriye.mp3',
+                  'Kesariya':'./src/assets/Kesariya.mp3',
+                  'Khaab':'./src/assets/Khaab.mp3',
+                  'Ek Baar hi Kiya to ':'./src/assets/Ek-Baar-Hi-Kiya-Toh-Yaaron-Pyaar-Kya.mp3',
+                  '3 peg':'./src/assets/3 peg.mp3',
+                  'Arjan vailley':'./src/assets/Arjan Vailly.mp3',
+                  'Mahiye':'./src/assets/mahiye.mp3',
+                  'O Mahi O mahi':'./src/assets/O Mahi.mp3',
+                  'Teri Baaton Mein Aisa Uljha':'./src/assets/Teri Baaton Mein Aisa Uljha.mp3',
+                  'Jale 2':'./src/assets/Jale 2  .mp3',
                   })
                 }
               >
